@@ -11,11 +11,29 @@
 
   <main class="app">
     <section id="landing" class="landing">
-      <div class="brand">
-        <p class="eyebrow">Chamas RPG</p>
-        <h1>Chamas Main</h1>
-        <p>Perfil, campanhas, fichas e ferramentas num lugar limpo. O Mixer entra como ferramenta separada.</p>
-      </div>
+      <section class="landing-hero">
+        <p class="eyebrow">Chamas RPG Social</p>
+        <h1>Mesa, campanha e comunidade no mesmo feed.</h1>
+        <p class="landing-copy">
+          Uma home com cara de rede social para acompanhar mesas, fichas, bots utilitarios
+          e ferramentas sem misturar a logica pesada do Mixer na experiencia principal.
+        </p>
+
+        <div class="hero-grid">
+          <article class="hero-card hero-card-primary">
+            <strong>Feed vivo</strong>
+            <p>Posts automaticos, atividade das campanhas e bots de suporte aparecendo no ritmo da mesa.</p>
+          </article>
+          <article class="hero-card">
+            <strong>Campanhas como comunidades</strong>
+            <p>Cada mesa fica com identidade propria, pessoas, ficha principal e atalhos claros.</p>
+          </article>
+          <article class="hero-card">
+            <strong>Ferramentas conectadas</strong>
+            <p>O Mixer entra como app separado, mas continua parecendo parte do ecossistema.</p>
+          </article>
+        </div>
+      </section>
 
       <section class="login-card">
         <div class="auth-tabs">
@@ -23,12 +41,18 @@
           <button id="registerTab" onclick="setAuthMode('register')">Cadastrar</button>
         </div>
 
+        <header class="auth-header">
+          <p class="eyebrow">Acesso</p>
+          <h2>Entre na sua timeline de mesa</h2>
+          <p>Perfis, campanhas, fichas e funcoes num shell social unico.</p>
+        </header>
+
         <div id="loginBox" class="auth-box">
           <label>Nome / apelido</label>
           <input id="loginName" autocomplete="username" placeholder="adam">
           <label>Senha</label>
           <input id="loginPassword" autocomplete="current-password" type="password" placeholder="senha">
-          <button id="loginBtn" class="primary full">Entrar</button>
+          <button id="loginBtn" class="primary full">Entrar agora</button>
         </div>
 
         <div id="registerBox" class="auth-box hidden">
@@ -39,51 +63,98 @@
           <label>Repita sua senha</label>
           <input id="registerPasswordConfirm" autocomplete="new-password" type="password" placeholder="repita a senha">
           <button id="registerBtn" class="primary full">Criar conta</button>
-          <small>O primeiro usuario cadastrado vira developer, se a variavel permitir.</small>
+          <small>O primeiro usuario cadastrado pode receber papel de developer pela configuracao do app.</small>
         </div>
       </section>
     </section>
 
     <section id="home" class="home hidden">
-      <aside class="sidebar">
-        <div class="logo-row">
-          <span id="meAvatar" class="avatar">CM</span>
+      <header class="topbar">
+        <div class="topbar-brand">
+          <div class="brand-mark">CM</div>
           <div>
             <strong>Chamas Main</strong>
-            <small id="meName">Usuario</small>
+            <small id="mainSubtitle">Feed social da mesa</small>
           </div>
         </div>
 
-        <button class="nav active" data-view="forYou">For You</button>
-        <button class="nav" data-view="profile">Meu perfil</button>
+        <div class="search-shell">
+          <input id="mainSearch" placeholder="Buscar campanhas, perfis, bots e fichas">
+        </div>
+
+        <div class="topbar-actions">
+          <button type="button" onclick="setView('campaigns')">Nova mesa</button>
+          <button type="button" onclick="openMixer()">Abrir Mixer</button>
+          <button type="button" onclick="loadState()">Atualizar</button>
+        </div>
+
+        <div class="topbar-profile">
+          <span id="meAvatar" class="avatar">CM</span>
+          <div class="topbar-profile-copy">
+            <strong id="meName">Usuario</strong>
+            <small id="meHandle">@conta</small>
+          </div>
+        </div>
+      </header>
+
+      <div class="home-shell">
+        <aside class="sidebar">
+          <section class="sidebar-card">
+            <div class="logo-row">
+              <span id="sidebarAvatar" class="avatar">CM</span>
+              <div>
+                <strong id="sidebarName">Usuario</strong>
+                <small id="sidebarRole">Explorando o feed</small>
+              </div>
+            </div>
+
+            <button class="nav active" data-view="forYou">For You</button>
+            <button class="nav" data-view="profile">Meu perfil</button>
+            <button class="nav" data-view="users">Perfis</button>
+            <button class="nav" data-view="campaigns">Campanhas</button>
+            <button class="nav" data-view="sheets">Minhas fichas</button>
+            <button class="nav" data-view="tools">Funcoes</button>
+            <button class="nav" data-view="settings">Configuracoes</button>
+          </section>
+
+          <section class="sidebar-card quick-card" aria-label="Funcoes rapidas">
+            <p class="eyebrow">Acesso rapido</p>
+            <button type="button" onclick="openMixer()">Mixer</button>
+            <button type="button" onclick="setView('campaigns')">Campanhas</button>
+            <button type="button" onclick="setView('sheets')">Fichas</button>
+          </section>
+
+          <div class="sidebar-footer">
+            <button id="logoutBtn" class="ghost full">Logout</button>
+          </div>
+        </aside>
+
+        <section class="workspace">
+          <header class="workspace-head">
+            <div>
+              <p class="eyebrow">Timeline</p>
+              <h2 id="pageTitle">For You</h2>
+            </div>
+            <p id="pageSummary" class="page-summary">Acompanhe posts, campanhas, fichas e bots em um feed central.</p>
+          </header>
+
+          <div id="forYouView" class="view"></div>
+          <div id="profileView" class="view hidden"></div>
+          <div id="usersView" class="view hidden"></div>
+          <div id="campaignsView" class="view hidden"></div>
+          <div id="sheetsView" class="view hidden"></div>
+          <div id="toolsView" class="view hidden"></div>
+          <div id="settingsView" class="view hidden"></div>
+        </section>
+      </div>
+
+      <nav class="mobile-nav" aria-label="Navegacao principal">
+        <button class="nav active" data-view="forYou">Feed</button>
+        <button class="nav" data-view="campaigns">Mesas</button>
         <button class="nav" data-view="users">Perfis</button>
-        <button class="nav" data-view="campaigns">Campanhas</button>
-        <button class="nav" data-view="sheets">Minhas fichas</button>
-        <button class="nav" data-view="tools">Ferramentas</button>
-        <button class="nav" data-view="settings">Configuracoes</button>
-
-        <div class="sidebar-footer">
-          <button id="logoutBtn" class="ghost full">Logout</button>
-        </div>
-      </aside>
-
-      <section class="workspace">
-        <header class="topbar">
-          <div>
-            <p class="eyebrow">Main</p>
-            <h2 id="pageTitle">For You</h2>
-          </div>
-          <button class="ghost" onclick="loadState()">Atualizar</button>
-        </header>
-
-        <div id="forYouView" class="view"></div>
-        <div id="profileView" class="view hidden"></div>
-        <div id="usersView" class="view hidden"></div>
-        <div id="campaignsView" class="view hidden"></div>
-        <div id="sheetsView" class="view hidden"></div>
-        <div id="toolsView" class="view hidden"></div>
-        <div id="settingsView" class="view hidden"></div>
-      </section>
+        <button class="nav" data-view="tools">Apps</button>
+        <button class="nav" data-view="profile">Perfil</button>
+      </nav>
     </section>
   </main>
 

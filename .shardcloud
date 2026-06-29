@@ -1,1 +1,8 @@
-start=python main.py
+DISPLAY_NAME=Chamas Main
+DESCRIPTION=App principal social do Chamas RPG com feed, campanhas, perfis, fichas e funcoes separadas do Mixer.
+MAIN=main.py
+LANGUAGE=python
+MEMORY=512
+VERSION=latest
+SUBDOMAIN=chamas-main
+CUSTOM_COMMAND=python main.py
