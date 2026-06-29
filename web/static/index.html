@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chamas Main</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div id="toast" class="toast hidden"></div>
+
+  <main class="app">
+    <section id="landing" class="landing">
+      <div class="brand">
+        <p class="eyebrow">Chamas RPG</p>
+        <h1>Chamas Main</h1>
+        <p>Perfil, campanhas, fichas e ferramentas num lugar limpo. O Mixer entra como ferramenta separada.</p>
+      </div>
+
+      <section class="login-card">
+        <div class="auth-tabs">
+          <button id="loginTab" class="active" onclick="setAuthMode('login')">Entrar</button>
+          <button id="registerTab" onclick="setAuthMode('register')">Cadastrar</button>
+        </div>
+
+        <div id="loginBox" class="auth-box">
+          <label>Nome / apelido</label>
+          <input id="loginName" autocomplete="username" placeholder="adam">
+          <label>Senha</label>
+          <input id="loginPassword" autocomplete="current-password" type="password" placeholder="senha">
+          <button id="loginBtn" class="primary full">Entrar</button>
+        </div>
+
+        <div id="registerBox" class="auth-box hidden">
+          <label>Nome / apelido</label>
+          <input id="registerName" autocomplete="username" placeholder="adam">
+          <label>Senha</label>
+          <input id="registerPassword" autocomplete="new-password" type="password" placeholder="minimo 4 caracteres">
+          <label>Repita sua senha</label>
+          <input id="registerPasswordConfirm" autocomplete="new-password" type="password" placeholder="repita a senha">
+          <button id="registerBtn" class="primary full">Criar conta</button>
+          <small>O primeiro usuario cadastrado vira developer, se a variavel permitir.</small>
+        </div>
+      </section>
+    </section>
+
+    <section id="home" class="home hidden">
+      <aside class="sidebar">
+        <div class="logo-row">
+          <span id="meAvatar" class="avatar">CM</span>
+          <div>
+            <strong>Chamas Main</strong>
+            <small id="meName">Usuario</small>
+          </div>
+        </div>
+
+        <button class="nav active" data-view="forYou">For You</button>
+        <button class="nav" data-view="profile">Meu perfil</button>
+        <button class="nav" data-view="users">Perfis</button>
+        <button class="nav" data-view="campaigns">Campanhas</button>
+        <button class="nav" data-view="sheets">Minhas fichas</button>
+        <button class="nav" data-view="tools">Ferramentas</button>
+        <button class="nav" data-view="settings">Configuracoes</button>
+
+        <div class="sidebar-footer">
+          <button id="logoutBtn" class="ghost full">Logout</button>
+        </div>
+      </aside>
+
+      <section class="workspace">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Main</p>
+            <h2 id="pageTitle">For You</h2>
+          </div>
+          <button class="ghost" onclick="loadState()">Atualizar</button>
+        </header>
+
+        <div id="forYouView" class="view"></div>
+        <div id="profileView" class="view hidden"></div>
+        <div id="usersView" class="view hidden"></div>
+        <div id="campaignsView" class="view hidden"></div>
+        <div id="sheetsView" class="view hidden"></div>
+        <div id="toolsView" class="view hidden"></div>
+        <div id="settingsView" class="view hidden"></div>
+      </section>
+    </section>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
